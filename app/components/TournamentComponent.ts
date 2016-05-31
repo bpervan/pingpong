@@ -7,9 +7,14 @@ import {TextboxComponent} from './TextboxComponent'
 
 @Component(<any>{
     selector: 'tournament',
-    template: '<textbox id="prvi"></textbox><br /><textbox id="drugi"></textbox>',
+    template: `
+        <textbox id="prvi" text="Igrac"></textbox><br />
+        <textbox id="drugi" text="Igrac"></textbox>`,
     directives: [TextboxComponent]
 })
 export class TournamentComponent {
 
+    constructor(){
+
+    }
 }

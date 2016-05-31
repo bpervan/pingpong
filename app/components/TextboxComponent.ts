@@ -1,4 +1,5 @@
-import {Component} from '@angular/core';
+import {Component, ElementRef, AfterViewInit} from '@angular/core';
+declare var componentHandler: any;
 
 @Component({
     selector: 'textbox',
@@ -10,10 +11,14 @@ import {Component} from '@angular/core';
     `,
     inputs: ['id', 'text']
 })
-export class TextboxComponent {
+export class TextboxComponent implements AfterViewInit{
     public id: String;
     public text: String;
 
-    constructor(){
+    constructor(private elementRef: ElementRef){
+    }
+
+    ngAfterViewInit(){
+        componentHandler.upgradeElement(this.elementRef.nativeElement);
     }
 }
