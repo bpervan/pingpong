@@ -2,19 +2,38 @@
  * Created by bpervan on 31.5.2016..
  */
 
-import {Component} from '@angular/core';
-import {TextboxComponent} from './TextboxComponent'
+import {Component, ElementRef} from '@angular/core';
+import {TextboxComponent} from './simple/TextboxComponent'
+import {ButtonComponent} from "./simple/ButtonComponent";
+import {Player} from "../model/Player";
+import {PlayerInputComponent} from "./PlayerInputComponent";
 
 @Component(<any>{
     selector: 'tournament',
     template: `
-        <textbox id="prvi" text="Igrac"></textbox><br />
-        <textbox id="drugi" text="Igrac"></textbox>`,
-    directives: [TextboxComponent]
+        <player-input *ngFor="let player of players" [id]="player.name" [player]="player"></player-input>
+        <btn (onClick)="handleAddPlayer($event)" buttonText="Add new"></btn><br />
+        <btn (onClick)="handleTournamentStart($event)" buttonText="Start tournament"></btn>
+    `,
+    directives: [PlayerInputComponent, TextboxComponent, ButtonComponent]
 })
 export class TournamentComponent {
 
-    constructor(){
+    private players: Array<Player>;
 
+    constructor(private elementRef: ElementRef){
+        this.players = [];
+        this.players.push(new Player("Test1"));
+        this.players.push(new Player("Test2"));
+        this.players.push(new Player("Test3"));
+    }
+
+    handleAddPlayer(inputBoolean: boolean){
+        console.log("Captured click in tournamentcomponent");
+        this.players.push(new Player(""));
+    }
+
+    handleTournamentStart(inputBoolean: boolean){
+        console.log("Captured click tournametstart")
     }
 }

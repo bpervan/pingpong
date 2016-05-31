@@ -5,7 +5,7 @@ declare var componentHandler: any;
     selector: 'textbox',
     template: `
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" [id]="id">
+            <input class="mdl-textfield__input" type="text" id="id">
             <label class="mdl-textfield__label"  [htmlFor]="id">{{text}}</label>
         </div>
     `,
