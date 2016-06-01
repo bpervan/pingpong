@@ -1,9 +1,9 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
-    selector: 'btn',
+    selector: 'mdl-button',
     template: `
-        <button (click)="click()" class="mdl-button mdl-js-button mdl-button--raised">
+        <button (click)="handleClick()" class="mdl-button mdl-js-button mdl-button--raised">
             {{buttonText}}
         </button>
     `
@@ -14,7 +14,7 @@ export class ButtonComponent {
     @Output()
     onClick = new EventEmitter<boolean>();
 
-    click(){
+    handleClick(){
         this.onClick.emit(false);
     }
 }

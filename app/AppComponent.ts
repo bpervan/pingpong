@@ -3,9 +3,10 @@
  */
 
 import {Component} from '@angular/core';
-import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
+import {Routes, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router';
 import {DashboardComponent} from './components/DashboardComponent';
-import {TournamentComponent} from './components/TournamentComponent';
+import {TournamentCreationComponent} from './components/TournamentCreationComponent';
+import {InTournamentComponent} from "./components/InTournamentComponent";
 
 
 @Component({
@@ -21,8 +22,8 @@ import {TournamentComponent} from './components/TournamentComponent';
                     <div class="android-header-spacer mdl-layout-spacer"></div>
                     <div class="android-navigation-container">
                         <nav class="android-navigation mdl-navigation">
-                            <a class="mdl-navigation__link mdl-typography--text-uppercase" [routerLink]="['Dashboard']">Dashboard</a>
-                            <a class="mdl-navigation__link mdl-typography--text-uppercase" [routerLink]="['Tournament']">New tournament</a>
+                            <a class="mdl-navigation__link mdl-typography--text-uppercase" [routerLink]="['/dashboard']">Dashboard</a>
+                            <a class="mdl-navigation__link mdl-typography--text-uppercase" [routerLink]="['/create']">New tournament</a>
                         </nav>
                     </div>
                 </div>
@@ -33,17 +34,21 @@ import {TournamentComponent} from './components/TournamentComponent';
     directives: [ROUTER_DIRECTIVES],
     providers: [ROUTER_PROVIDERS]
 })
-@RouteConfig([
-    <any>{
+@Routes(<any>[
+    {
         path: '/dashboard',
-        name: 'Dashboard',
         component: DashboardComponent,
-        useAsDefault: true
+        name: 'Dashboard'
     },
     {
-        path: '/tournament',
-        name: 'Tournament',
-        component: TournamentComponent
+        path: '/create',
+        component: TournamentCreationComponent,
+        name: 'TournamentCreation'
+    },
+    {
+        path: '/tournament/:players',
+        component: InTournamentComponent,
+        name: 'InTournament'
     }
 ])
 export class AppComponent {

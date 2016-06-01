@@ -1,19 +1,20 @@
-import {Component, ElementRef, AfterViewInit} from '@angular/core';
+import {Component, Input, ElementRef, AfterViewInit} from '@angular/core';
 declare var componentHandler: any;
 
 @Component({
-    selector: 'textbox',
+    selector: 'mdl-textbox',
     template: `
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="id">
-            <label class="mdl-textfield__label"  [htmlFor]="id">{{text}}</label>
+            <input class="mdl-textfield__input" type="text" [id]="htmlId">
+            <label class="mdl-textfield__label"  [htmlFor]="htmlId">{{initialText}}</label>
         </div>
-    `,
-    inputs: ['id', 'text']
+    `
 })
 export class TextboxComponent implements AfterViewInit{
-    public id: String;
-    public text: String;
+    @Input()
+    public htmlId: String;
+    @Input()
+    public initialText: String;
 
     constructor(private elementRef: ElementRef){
     }
