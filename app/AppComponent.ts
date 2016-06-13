@@ -12,24 +12,33 @@ import {InTournamentComponent} from "./components/InTournamentComponent";
 @Component({
     selector: 'app',
     template: `
-        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-        
-            <div class="android-header mdl-layout__header mdl-layout__header--waterfall">
-                <div class="mdl-layout__header-row">
-                    <span class="android-title mdl-layout-title">
-                        <h3>Alive and kicking</h3>
-                    </span>
-                    <div class="android-header-spacer mdl-layout-spacer"></div>
-                    <div class="android-navigation-container">
-                        <nav class="android-navigation mdl-navigation">
-                            <a class="mdl-navigation__link mdl-typography--text-uppercase" [routerLink]="['/dashboard']">Dashboard</a>
-                            <a class="mdl-navigation__link mdl-typography--text-uppercase" [routerLink]="['/create']">New tournament</a>
-                        </nav>
-                    </div>
+        <nav class="navbar navbar-inverse navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Project name</a>
                 </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a [routerLink]="['/dashboard']">Dashboard</a></li>
+                        <li><a [routerLink]="['/create']">New tournament</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
             </div>
-        <router-outlet></router-outlet>
-        </div>
+        </nav>
+        <div class="container">
+            <div class="starter-template">
+                <h1>Bootstrap starter template</h1>
+                <p class="lead"><router-outlet>
+                    </router-outlet>
+                </p>
+            </div>
+        </div><!-- /.container -->
     `,
     directives: [ROUTER_DIRECTIVES],
     providers: [ROUTER_PROVIDERS]

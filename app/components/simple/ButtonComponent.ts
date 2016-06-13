@@ -3,7 +3,7 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
 @Component({
     selector: 'mdl-button',
     template: `
-        <button (click)="handleClick()" class="mdl-button mdl-js-button mdl-button--raised">
+        <button (click)="handleClick()" class="btn btn-lg btn-info">
             {{buttonText}}
         </button>
     `
