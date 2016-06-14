@@ -12,8 +12,8 @@ import {PlayerInputComponent} from "./PlayerInputComponent";
 @Component(<any>{
     selector: 'tournament-creation',
     template: `
-        <player-input *ngFor="let player of players" [player]="player"></player-input>
-        <mdl-button (onClick)="handleAddPlayer($event)" buttonText="Add new"></mdl-button><br />
+        <player-input *ngFor="let player of players" [player]="player" (selfDestruct)="handleRemovePlayer($event)"></player-input>
+        <mdl-button (onClick)="handleAddPlayer($event)" buttonText="Add new"></mdl-button><br /><br />
         <mdl-button (onClick)="handleTournamentStart($event)" buttonText="Start tournament"></mdl-button>
     `,
     directives: [PlayerInputComponent, TextboxComponent, ButtonComponent]
@@ -25,19 +25,33 @@ export class TournamentCreationComponent implements AfterViewInit {
 
     constructor(private elementRef: ElementRef, private router: Router){
         this.players = [];
-        this.players.push(new Player({id: 'test1', name: 'Test1'}));
-        this.players.push(new Player({id: 'test2', name: 'Test2'}));
-        this.players.push(new Player({id: 'test3', name: 'Test3'}));
-        this.players.push(new Player({id: 'test4', name: 'Test4'}));
-        this.players.push(new Player({id: 'test5', name: 'Test5'}));
+        this.players.push(new Player({id: 'test1', name: 'Test1', surname: 'Test1', nick: 'test1'}));
+        this.players.push(new Player({id: 'test2', name: 'Test2', surname: 'Test2', nick: 'test2'}));
     }
 
-    handleAddPlayer(inputBoolean: boolean){
-        this.players.push(new Player({id: 'asdf', name: 'asdf'}));
+    handleAddPlayer(placeholder: boolean){
+        let randomId = this.generateRandom();
+        this.players.push(new Player({
+            id: 'test' + randomId,
+            name: 'Test' + randomId,
+            surname: 'Test' + randomId, 
+            nick: 'test' + randomId
+        }));
+    }
+
+    handleRemovePlayer(playerId: string){
+        console.log("Captured selfDestruct in TournamentCreationComponent");
+        console.log("playerId/$event: " + playerId);
+        this.players = this.players.filter(item => item.id != playerId);
+        console.log(this.players);
     }
 
     handleTournamentStart(inputBoolean: boolean){
         this.router.navigate(['/tournament', btoa(JSON.stringify(this.players))]);
+    }
+
+    generateRandom(){
+        return Math.floor(Math.random() * 1000000) + 1;
     }
 
     ngAfterViewInit() {
